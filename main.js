@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/d/index.js":
+/*!*********************************!*\
+  !*** ./node_modules/d/index.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isValue         = __webpack_require__(/*! type/value/is */ \"./node_modules/type/value/is.js\")\n  , isPlainFunction = __webpack_require__(/*! type/plain-function/is */ \"./node_modules/type/plain-function/is.js\")\n  , assign          = __webpack_require__(/*! es5-ext/object/assign */ \"./node_modules/es5-ext/object/assign/index.js\")\n  , normalizeOpts   = __webpack_require__(/*! es5-ext/object/normalize-options */ \"./node_modules/es5-ext/object/normalize-options.js\")\n  , contains        = __webpack_require__(/*! es5-ext/string/#/contains */ \"./node_modules/es5-ext/string/#/contains/index.js\");\n\nvar d = (module.exports = function (dscr, value/*, options*/) {\n\tvar c, e, w, options, desc;\n\tif (arguments.length < 2 || typeof dscr !== \"string\") {\n\t\toptions = value;\n\t\tvalue = dscr;\n\t\tdscr = null;\n\t} else {\n\t\toptions = arguments[2];\n\t}\n\tif (isValue(dscr)) {\n\t\tc = contains.call(dscr, \"c\");\n\t\te = contains.call(dscr, \"e\");\n\t\tw = contains.call(dscr, \"w\");\n\t} else {\n\t\tc = w = true;\n\t\te = false;\n\t}\n\n\tdesc = { value: value, configurable: c, enumerable: e, writable: w };\n\treturn !options ? desc : assign(normalizeOpts(options), desc);\n});\n\nd.gs = function (dscr, get, set/*, options*/) {\n\tvar c, e, options, desc;\n\tif (typeof dscr !== \"string\") {\n\t\toptions = set;\n\t\tset = get;\n\t\tget = dscr;\n\t\tdscr = null;\n\t} else {\n\t\toptions = arguments[3];\n\t}\n\tif (!isValue(get)) {\n\t\tget = undefined;\n\t} else if (!isPlainFunction(get)) {\n\t\toptions = get;\n\t\tget = set = undefined;\n\t} else if (!isValue(set)) {\n\t\tset = undefined;\n\t} else if (!isPlainFunction(set)) {\n\t\toptions = set;\n\t\tset = undefined;\n\t}\n\tif (isValue(dscr)) {\n\t\tc = contains.call(dscr, \"c\");\n\t\te = contains.call(dscr, \"e\");\n\t} else {\n\t\tc = true;\n\t\te = false;\n\t}\n\n\tdesc = { get: get, set: set, configurable: c, enumerable: e };\n\treturn !options ? desc : assign(normalizeOpts(options), desc);\n};\n\n\n//# sourceURL=webpack:///./node_modules/d/index.js?");
+
+/***/ }),
+
 /***/ "./node_modules/dropbox/dist/Dropbox-sdk.min.js":
 /*!******************************************************!*\
   !*** ./node_modules/dropbox/dist/Dropbox-sdk.min.js ***!
@@ -97,6 +109,629 @@ eval("!function(e,t){ true?module.exports=t():undefined}(this,function(){\"use s
 
 /***/ }),
 
+/***/ "./node_modules/es5-ext/array/from/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/es5-ext/array/from/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = __webpack_require__(/*! ./is-implemented */ \"./node_modules/es5-ext/array/from/is-implemented.js\")() ? Array.from : __webpack_require__(/*! ./shim */ \"./node_modules/es5-ext/array/from/shim.js\");\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/array/from/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/array/from/is-implemented.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/es5-ext/array/from/is-implemented.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function () {\n\tvar from = Array.from, arr, result;\n\tif (typeof from !== \"function\") return false;\n\tarr = [\"raz\", \"dwa\"];\n\tresult = from(arr);\n\treturn Boolean(result && result !== arr && result[1] === \"dwa\");\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/array/from/is-implemented.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/array/from/shim.js":
+/*!*************************************************!*\
+  !*** ./node_modules/es5-ext/array/from/shim.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar iteratorSymbol = __webpack_require__(/*! es6-symbol */ \"./node_modules/es6-symbol/index.js\").iterator\n  , isArguments    = __webpack_require__(/*! ../../function/is-arguments */ \"./node_modules/es5-ext/function/is-arguments.js\")\n  , isFunction     = __webpack_require__(/*! ../../function/is-function */ \"./node_modules/es5-ext/function/is-function.js\")\n  , toPosInt       = __webpack_require__(/*! ../../number/to-pos-integer */ \"./node_modules/es5-ext/number/to-pos-integer.js\")\n  , callable       = __webpack_require__(/*! ../../object/valid-callable */ \"./node_modules/es5-ext/object/valid-callable.js\")\n  , validValue     = __webpack_require__(/*! ../../object/valid-value */ \"./node_modules/es5-ext/object/valid-value.js\")\n  , isValue        = __webpack_require__(/*! ../../object/is-value */ \"./node_modules/es5-ext/object/is-value.js\")\n  , isString       = __webpack_require__(/*! ../../string/is-string */ \"./node_modules/es5-ext/string/is-string.js\")\n  , isArray        = Array.isArray\n  , call           = Function.prototype.call\n  , desc           = { configurable: true, enumerable: true, writable: true, value: null }\n  , defineProperty = Object.defineProperty;\n\n// eslint-disable-next-line complexity, max-lines-per-function\nmodule.exports = function (arrayLike/*, mapFn, thisArg*/) {\n\tvar mapFn = arguments[1]\n\t  , thisArg = arguments[2]\n\t  , Context\n\t  , i\n\t  , j\n\t  , arr\n\t  , length\n\t  , code\n\t  , iterator\n\t  , result\n\t  , getIterator\n\t  , value;\n\n\tarrayLike = Object(validValue(arrayLike));\n\n\tif (isValue(mapFn)) callable(mapFn);\n\tif (!this || this === Array || !isFunction(this)) {\n\t\t// Result: Plain array\n\t\tif (!mapFn) {\n\t\t\tif (isArguments(arrayLike)) {\n\t\t\t\t// Source: Arguments\n\t\t\t\tlength = arrayLike.length;\n\t\t\t\tif (length !== 1) return Array.apply(null, arrayLike);\n\t\t\t\tarr = new Array(1);\n\t\t\t\tarr[0] = arrayLike[0];\n\t\t\t\treturn arr;\n\t\t\t}\n\t\t\tif (isArray(arrayLike)) {\n\t\t\t\t// Source: Array\n\t\t\t\tarr = new Array((length = arrayLike.length));\n\t\t\t\tfor (i = 0; i < length; ++i) arr[i] = arrayLike[i];\n\t\t\t\treturn arr;\n\t\t\t}\n\t\t}\n\t\tarr = [];\n\t} else {\n\t\t// Result: Non plain array\n\t\tContext = this;\n\t}\n\n\tif (!isArray(arrayLike)) {\n\t\tif ((getIterator = arrayLike[iteratorSymbol]) !== undefined) {\n\t\t\t// Source: Iterator\n\t\t\titerator = callable(getIterator).call(arrayLike);\n\t\t\tif (Context) arr = new Context();\n\t\t\tresult = iterator.next();\n\t\t\ti = 0;\n\t\t\twhile (!result.done) {\n\t\t\t\tvalue = mapFn ? call.call(mapFn, thisArg, result.value, i) : result.value;\n\t\t\t\tif (Context) {\n\t\t\t\t\tdesc.value = value;\n\t\t\t\t\tdefineProperty(arr, i, desc);\n\t\t\t\t} else {\n\t\t\t\t\tarr[i] = value;\n\t\t\t\t}\n\t\t\t\tresult = iterator.next();\n\t\t\t\t++i;\n\t\t\t}\n\t\t\tlength = i;\n\t\t} else if (isString(arrayLike)) {\n\t\t\t// Source: String\n\t\t\tlength = arrayLike.length;\n\t\t\tif (Context) arr = new Context();\n\t\t\tfor (i = 0, j = 0; i < length; ++i) {\n\t\t\t\tvalue = arrayLike[i];\n\t\t\t\tif (i + 1 < length) {\n\t\t\t\t\tcode = value.charCodeAt(0);\n\t\t\t\t\t// eslint-disable-next-line max-depth\n\t\t\t\t\tif (code >= 0xd800 && code <= 0xdbff) value += arrayLike[++i];\n\t\t\t\t}\n\t\t\t\tvalue = mapFn ? call.call(mapFn, thisArg, value, j) : value;\n\t\t\t\tif (Context) {\n\t\t\t\t\tdesc.value = value;\n\t\t\t\t\tdefineProperty(arr, j, desc);\n\t\t\t\t} else {\n\t\t\t\t\tarr[j] = value;\n\t\t\t\t}\n\t\t\t\t++j;\n\t\t\t}\n\t\t\tlength = j;\n\t\t}\n\t}\n\tif (length === undefined) {\n\t\t// Source: array or array-like\n\t\tlength = toPosInt(arrayLike.length);\n\t\tif (Context) arr = new Context(length);\n\t\tfor (i = 0; i < length; ++i) {\n\t\t\tvalue = mapFn ? call.call(mapFn, thisArg, arrayLike[i], i) : arrayLike[i];\n\t\t\tif (Context) {\n\t\t\t\tdesc.value = value;\n\t\t\t\tdefineProperty(arr, i, desc);\n\t\t\t} else {\n\t\t\t\tarr[i] = value;\n\t\t\t}\n\t\t}\n\t}\n\tif (Context) {\n\t\tdesc.value = null;\n\t\tarr.length = length;\n\t}\n\treturn arr;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/array/from/shim.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/function/is-arguments.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/es5-ext/function/is-arguments.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar objToString = Object.prototype.toString\n  , id = objToString.call((function () { return arguments; })());\n\nmodule.exports = function (value) { return objToString.call(value) === id; };\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/function/is-arguments.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/function/is-function.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es5-ext/function/is-function.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar objToString = Object.prototype.toString\n  , isFunctionStringTag = RegExp.prototype.test.bind(/^[object [A-Za-z0-9]*Function]$/);\n\nmodule.exports = function (value) {\n\treturn typeof value === \"function\" && isFunctionStringTag(objToString.call(value));\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/function/is-function.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/function/noop.js":
+/*!***********************************************!*\
+  !*** ./node_modules/es5-ext/function/noop.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\n// eslint-disable-next-line no-empty-function\nmodule.exports = function () {};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/function/noop.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/global.js":
+/*!****************************************!*\
+  !*** ./node_modules/es5-ext/global.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = (function () {\n\tif (this) return this;\n\n\t// Unexpected strict mode (may happen if e.g. bundled into ESM module), be nice\n\n\t// Thanks @mathiasbynens -> https://mathiasbynens.be/notes/globalthis\n\t// In all ES5+ engines global object inherits from Object.prototype\n\t// (if you approached one that doesn't please report)\n\tObject.defineProperty(Object.prototype, \"__global__\", {\n\t\tget: function () { return this; },\n\t\tconfigurable: true\n\t});\n\ttry { return __global__; }\n\tfinally { delete Object.prototype.__global__; }\n})();\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/global.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/math/sign/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/es5-ext/math/sign/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = __webpack_require__(/*! ./is-implemented */ \"./node_modules/es5-ext/math/sign/is-implemented.js\")() ? Math.sign : __webpack_require__(/*! ./shim */ \"./node_modules/es5-ext/math/sign/shim.js\");\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/math/sign/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/math/sign/is-implemented.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/es5-ext/math/sign/is-implemented.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function () {\n\tvar sign = Math.sign;\n\tif (typeof sign !== \"function\") return false;\n\treturn sign(10) === 1 && sign(-20) === -1;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/math/sign/is-implemented.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/math/sign/shim.js":
+/*!************************************************!*\
+  !*** ./node_modules/es5-ext/math/sign/shim.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function (value) {\n\tvalue = Number(value);\n\tif (isNaN(value) || value === 0) return value;\n\treturn value > 0 ? 1 : -1;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/math/sign/shim.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/number/to-integer.js":
+/*!***************************************************!*\
+  !*** ./node_modules/es5-ext/number/to-integer.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar sign  = __webpack_require__(/*! ../math/sign */ \"./node_modules/es5-ext/math/sign/index.js\")\n  , abs   = Math.abs\n  , floor = Math.floor;\n\nmodule.exports = function (value) {\n\tif (isNaN(value)) return 0;\n\tvalue = Number(value);\n\tif (value === 0 || !isFinite(value)) return value;\n\treturn sign(value) * floor(abs(value));\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/number/to-integer.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/number/to-pos-integer.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/es5-ext/number/to-pos-integer.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar toInteger = __webpack_require__(/*! ./to-integer */ \"./node_modules/es5-ext/number/to-integer.js\")\n  , max       = Math.max;\n\nmodule.exports = function (value) { return max(0, toInteger(value)); };\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/number/to-pos-integer.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/assign/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/es5-ext/object/assign/index.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = __webpack_require__(/*! ./is-implemented */ \"./node_modules/es5-ext/object/assign/is-implemented.js\")() ? Object.assign : __webpack_require__(/*! ./shim */ \"./node_modules/es5-ext/object/assign/shim.js\");\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/assign/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/assign/is-implemented.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/es5-ext/object/assign/is-implemented.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function () {\n\tvar assign = Object.assign, obj;\n\tif (typeof assign !== \"function\") return false;\n\tobj = { foo: \"raz\" };\n\tassign(obj, { bar: \"dwa\" }, { trzy: \"trzy\" });\n\treturn obj.foo + obj.bar + obj.trzy === \"razdwatrzy\";\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/assign/is-implemented.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/assign/shim.js":
+/*!****************************************************!*\
+  !*** ./node_modules/es5-ext/object/assign/shim.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar keys  = __webpack_require__(/*! ../keys */ \"./node_modules/es5-ext/object/keys/index.js\")\n  , value = __webpack_require__(/*! ../valid-value */ \"./node_modules/es5-ext/object/valid-value.js\")\n  , max   = Math.max;\n\nmodule.exports = function (dest, src/*, …srcn*/) {\n\tvar error, i, length = max(arguments.length, 2), assign;\n\tdest = Object(value(dest));\n\tassign = function (key) {\n\t\ttry {\n\t\t\tdest[key] = src[key];\n\t\t} catch (e) {\n\t\t\tif (!error) error = e;\n\t\t}\n\t};\n\tfor (i = 1; i < length; ++i) {\n\t\tsrc = arguments[i];\n\t\tkeys(src).forEach(assign);\n\t}\n\tif (error !== undefined) throw error;\n\treturn dest;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/assign/shim.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/is-value.js":
+/*!*************************************************!*\
+  !*** ./node_modules/es5-ext/object/is-value.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _undefined = __webpack_require__(/*! ../function/noop */ \"./node_modules/es5-ext/function/noop.js\")(); // Support ES3 engines\n\nmodule.exports = function (val) { return val !== _undefined && val !== null; };\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/is-value.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/keys/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/es5-ext/object/keys/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = __webpack_require__(/*! ./is-implemented */ \"./node_modules/es5-ext/object/keys/is-implemented.js\")() ? Object.keys : __webpack_require__(/*! ./shim */ \"./node_modules/es5-ext/object/keys/shim.js\");\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/keys/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/keys/is-implemented.js":
+/*!************************************************************!*\
+  !*** ./node_modules/es5-ext/object/keys/is-implemented.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function () {\n\ttry {\n\t\tObject.keys(\"primitive\");\n\t\treturn true;\n\t} catch (e) {\n\t\treturn false;\n\t}\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/keys/is-implemented.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/keys/shim.js":
+/*!**************************************************!*\
+  !*** ./node_modules/es5-ext/object/keys/shim.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isValue = __webpack_require__(/*! ../is-value */ \"./node_modules/es5-ext/object/is-value.js\");\n\nvar keys = Object.keys;\n\nmodule.exports = function (object) { return keys(isValue(object) ? Object(object) : object); };\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/keys/shim.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/normalize-options.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/es5-ext/object/normalize-options.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isValue = __webpack_require__(/*! ./is-value */ \"./node_modules/es5-ext/object/is-value.js\");\n\nvar forEach = Array.prototype.forEach, create = Object.create;\n\nvar process = function (src, obj) {\n\tvar key;\n\tfor (key in src) obj[key] = src[key];\n};\n\n// eslint-disable-next-line no-unused-vars\nmodule.exports = function (opts1/*, …options*/) {\n\tvar result = create(null);\n\tforEach.call(arguments, function (options) {\n\t\tif (!isValue(options)) return;\n\t\tprocess(Object(options), result);\n\t});\n\treturn result;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/normalize-options.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/primitive-set.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es5-ext/object/primitive-set.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar forEach = Array.prototype.forEach, create = Object.create;\n\n// eslint-disable-next-line no-unused-vars\nmodule.exports = function (arg/*, …args*/) {\n\tvar set = create(null);\n\tforEach.call(arguments, function (name) { set[name] = true; });\n\treturn set;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/primitive-set.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/valid-callable.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/es5-ext/object/valid-callable.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function (fn) {\n\tif (typeof fn !== \"function\") throw new TypeError(fn + \" is not a function\");\n\treturn fn;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/valid-callable.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/object/valid-value.js":
+/*!****************************************************!*\
+  !*** ./node_modules/es5-ext/object/valid-value.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isValue = __webpack_require__(/*! ./is-value */ \"./node_modules/es5-ext/object/is-value.js\");\n\nmodule.exports = function (value) {\n\tif (!isValue(value)) throw new TypeError(\"Cannot use null or undefined\");\n\treturn value;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/object/valid-value.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/string/#/contains/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/es5-ext/string/#/contains/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = __webpack_require__(/*! ./is-implemented */ \"./node_modules/es5-ext/string/#/contains/is-implemented.js\")() ? String.prototype.contains : __webpack_require__(/*! ./shim */ \"./node_modules/es5-ext/string/#/contains/shim.js\");\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/string/#/contains/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/string/#/contains/is-implemented.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/es5-ext/string/#/contains/is-implemented.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar str = \"razdwatrzy\";\n\nmodule.exports = function () {\n\tif (typeof str.contains !== \"function\") return false;\n\treturn str.contains(\"dwa\") === true && str.contains(\"foo\") === false;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/string/#/contains/is-implemented.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/string/#/contains/shim.js":
+/*!********************************************************!*\
+  !*** ./node_modules/es5-ext/string/#/contains/shim.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar indexOf = String.prototype.indexOf;\n\nmodule.exports = function (searchString/*, position*/) {\n\treturn indexOf.call(this, searchString, arguments[1]) > -1;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/string/#/contains/shim.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es5-ext/string/is-string.js":
+/*!**************************************************!*\
+  !*** ./node_modules/es5-ext/string/is-string.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar objToString = Object.prototype.toString, id = objToString.call(\"\");\n\nmodule.exports = function (value) {\n\treturn (\n\t\ttypeof value === \"string\" ||\n\t\t(value &&\n\t\t\ttypeof value === \"object\" &&\n\t\t\t(value instanceof String || objToString.call(value) === id)) ||\n\t\tfalse\n\t);\n};\n\n\n//# sourceURL=webpack:///./node_modules/es5-ext/string/is-string.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/es6-symbol/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = __webpack_require__(/*! ./is-implemented */ \"./node_modules/es6-symbol/is-implemented.js\")()\n\t? __webpack_require__(/*! es5-ext/global */ \"./node_modules/es5-ext/global.js\").Symbol\n\t: __webpack_require__(/*! ./polyfill */ \"./node_modules/es6-symbol/polyfill.js\");\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/is-implemented.js":
+/*!***************************************************!*\
+  !*** ./node_modules/es6-symbol/is-implemented.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar global     = __webpack_require__(/*! es5-ext/global */ \"./node_modules/es5-ext/global.js\")\n  , validTypes = { object: true, symbol: true };\n\nmodule.exports = function () {\n\tvar Symbol = global.Symbol;\n\tvar symbol;\n\tif (typeof Symbol !== \"function\") return false;\n\tsymbol = Symbol(\"test symbol\");\n\ttry { String(symbol); }\n\tcatch (e) { return false; }\n\n\t// Return 'true' also for polyfills\n\tif (!validTypes[typeof Symbol.iterator]) return false;\n\tif (!validTypes[typeof Symbol.toPrimitive]) return false;\n\tif (!validTypes[typeof Symbol.toStringTag]) return false;\n\n\treturn true;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/is-implemented.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/is-symbol.js":
+/*!**********************************************!*\
+  !*** ./node_modules/es6-symbol/is-symbol.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nmodule.exports = function (value) {\n\tif (!value) return false;\n\tif (typeof value === \"symbol\") return true;\n\tif (!value.constructor) return false;\n\tif (value.constructor.name !== \"Symbol\") return false;\n\treturn value[value.constructor.toStringTag] === \"Symbol\";\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/is-symbol.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/lib/private/generate-name.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/es6-symbol/lib/private/generate-name.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar d = __webpack_require__(/*! d */ \"./node_modules/d/index.js\");\n\nvar create = Object.create, defineProperty = Object.defineProperty, objPrototype = Object.prototype;\n\nvar created = create(null);\nmodule.exports = function (desc) {\n\tvar postfix = 0, name, ie11BugWorkaround;\n\twhile (created[desc + (postfix || \"\")]) ++postfix;\n\tdesc += postfix || \"\";\n\tcreated[desc] = true;\n\tname = \"@@\" + desc;\n\tdefineProperty(\n\t\tobjPrototype,\n\t\tname,\n\t\td.gs(null, function (value) {\n\t\t\t// For IE11 issue see:\n\t\t\t// https://connect.microsoft.com/IE/feedbackdetail/view/1928508/\n\t\t\t//    ie11-broken-getters-on-dom-objects\n\t\t\t// https://github.com/medikoo/es6-symbol/issues/12\n\t\t\tif (ie11BugWorkaround) return;\n\t\t\tie11BugWorkaround = true;\n\t\t\tdefineProperty(this, name, d(value));\n\t\t\tie11BugWorkaround = false;\n\t\t})\n\t);\n\treturn name;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/lib/private/generate-name.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/lib/private/setup/standard-symbols.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/es6-symbol/lib/private/setup/standard-symbols.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar d            = __webpack_require__(/*! d */ \"./node_modules/d/index.js\")\n  , NativeSymbol = __webpack_require__(/*! es5-ext/global */ \"./node_modules/es5-ext/global.js\").Symbol;\n\nmodule.exports = function (SymbolPolyfill) {\n\treturn Object.defineProperties(SymbolPolyfill, {\n\t\t// To ensure proper interoperability with other native functions (e.g. Array.from)\n\t\t// fallback to eventual native implementation of given symbol\n\t\thasInstance: d(\n\t\t\t\"\", (NativeSymbol && NativeSymbol.hasInstance) || SymbolPolyfill(\"hasInstance\")\n\t\t),\n\t\tisConcatSpreadable: d(\n\t\t\t\"\",\n\t\t\t(NativeSymbol && NativeSymbol.isConcatSpreadable) ||\n\t\t\t\tSymbolPolyfill(\"isConcatSpreadable\")\n\t\t),\n\t\titerator: d(\"\", (NativeSymbol && NativeSymbol.iterator) || SymbolPolyfill(\"iterator\")),\n\t\tmatch: d(\"\", (NativeSymbol && NativeSymbol.match) || SymbolPolyfill(\"match\")),\n\t\treplace: d(\"\", (NativeSymbol && NativeSymbol.replace) || SymbolPolyfill(\"replace\")),\n\t\tsearch: d(\"\", (NativeSymbol && NativeSymbol.search) || SymbolPolyfill(\"search\")),\n\t\tspecies: d(\"\", (NativeSymbol && NativeSymbol.species) || SymbolPolyfill(\"species\")),\n\t\tsplit: d(\"\", (NativeSymbol && NativeSymbol.split) || SymbolPolyfill(\"split\")),\n\t\ttoPrimitive: d(\n\t\t\t\"\", (NativeSymbol && NativeSymbol.toPrimitive) || SymbolPolyfill(\"toPrimitive\")\n\t\t),\n\t\ttoStringTag: d(\n\t\t\t\"\", (NativeSymbol && NativeSymbol.toStringTag) || SymbolPolyfill(\"toStringTag\")\n\t\t),\n\t\tunscopables: d(\n\t\t\t\"\", (NativeSymbol && NativeSymbol.unscopables) || SymbolPolyfill(\"unscopables\")\n\t\t)\n\t});\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/lib/private/setup/standard-symbols.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/lib/private/setup/symbol-registry.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/es6-symbol/lib/private/setup/symbol-registry.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar d              = __webpack_require__(/*! d */ \"./node_modules/d/index.js\")\n  , validateSymbol = __webpack_require__(/*! ../../../validate-symbol */ \"./node_modules/es6-symbol/validate-symbol.js\");\n\nvar registry = Object.create(null);\n\nmodule.exports = function (SymbolPolyfill) {\n\treturn Object.defineProperties(SymbolPolyfill, {\n\t\tfor: d(function (key) {\n\t\t\tif (registry[key]) return registry[key];\n\t\t\treturn (registry[key] = SymbolPolyfill(String(key)));\n\t\t}),\n\t\tkeyFor: d(function (symbol) {\n\t\t\tvar key;\n\t\t\tvalidateSymbol(symbol);\n\t\t\tfor (key in registry) {\n\t\t\t\tif (registry[key] === symbol) return key;\n\t\t\t}\n\t\t\treturn undefined;\n\t\t})\n\t});\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/lib/private/setup/symbol-registry.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/polyfill.js":
+/*!*********************************************!*\
+  !*** ./node_modules/es6-symbol/polyfill.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("// ES2015 Symbol polyfill for environments that do not (or partially) support it\n\n\n\nvar d                    = __webpack_require__(/*! d */ \"./node_modules/d/index.js\")\n  , validateSymbol       = __webpack_require__(/*! ./validate-symbol */ \"./node_modules/es6-symbol/validate-symbol.js\")\n  , NativeSymbol         = __webpack_require__(/*! es5-ext/global */ \"./node_modules/es5-ext/global.js\").Symbol\n  , generateName         = __webpack_require__(/*! ./lib/private/generate-name */ \"./node_modules/es6-symbol/lib/private/generate-name.js\")\n  , setupStandardSymbols = __webpack_require__(/*! ./lib/private/setup/standard-symbols */ \"./node_modules/es6-symbol/lib/private/setup/standard-symbols.js\")\n  , setupSymbolRegistry  = __webpack_require__(/*! ./lib/private/setup/symbol-registry */ \"./node_modules/es6-symbol/lib/private/setup/symbol-registry.js\");\n\nvar create = Object.create\n  , defineProperties = Object.defineProperties\n  , defineProperty = Object.defineProperty;\n\nvar SymbolPolyfill, HiddenSymbol, isNativeSafe;\n\nif (typeof NativeSymbol === \"function\") {\n\ttry {\n\t\tString(NativeSymbol());\n\t\tisNativeSafe = true;\n\t} catch (ignore) {}\n} else {\n\tNativeSymbol = null;\n}\n\n// Internal constructor (not one exposed) for creating Symbol instances.\n// This one is used to ensure that `someSymbol instanceof Symbol` always return false\nHiddenSymbol = function Symbol(description) {\n\tif (this instanceof HiddenSymbol) throw new TypeError(\"Symbol is not a constructor\");\n\treturn SymbolPolyfill(description);\n};\n\n// Exposed `Symbol` constructor\n// (returns instances of HiddenSymbol)\nmodule.exports = SymbolPolyfill = function Symbol(description) {\n\tvar symbol;\n\tif (this instanceof Symbol) throw new TypeError(\"Symbol is not a constructor\");\n\tif (isNativeSafe) return NativeSymbol(description);\n\tsymbol = create(HiddenSymbol.prototype);\n\tdescription = description === undefined ? \"\" : String(description);\n\treturn defineProperties(symbol, {\n\t\t__description__: d(\"\", description),\n\t\t__name__: d(\"\", generateName(description))\n\t});\n};\n\nsetupStandardSymbols(SymbolPolyfill);\nsetupSymbolRegistry(SymbolPolyfill);\n\n// Internal tweaks for real symbol producer\ndefineProperties(HiddenSymbol.prototype, {\n\tconstructor: d(SymbolPolyfill),\n\ttoString: d(\"\", function () { return this.__name__; })\n});\n\n// Proper implementation of methods exposed on Symbol.prototype\n// They won't be accessible on produced symbol instances as they derive from HiddenSymbol.prototype\ndefineProperties(SymbolPolyfill.prototype, {\n\ttoString: d(function () { return \"Symbol (\" + validateSymbol(this).__description__ + \")\"; }),\n\tvalueOf: d(function () { return validateSymbol(this); })\n});\ndefineProperty(\n\tSymbolPolyfill.prototype,\n\tSymbolPolyfill.toPrimitive,\n\td(\"\", function () {\n\t\tvar symbol = validateSymbol(this);\n\t\tif (typeof symbol === \"symbol\") return symbol;\n\t\treturn symbol.toString();\n\t})\n);\ndefineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toStringTag, d(\"c\", \"Symbol\"));\n\n// Proper implementaton of toPrimitive and toStringTag for returned symbol instances\ndefineProperty(\n\tHiddenSymbol.prototype, SymbolPolyfill.toStringTag,\n\td(\"c\", SymbolPolyfill.prototype[SymbolPolyfill.toStringTag])\n);\n\n// Note: It's important to define `toPrimitive` as last one, as some implementations\n// implement `toPrimitive` natively without implementing `toStringTag` (or other specified symbols)\n// And that may invoke error in definition flow:\n// See: https://github.com/medikoo/es6-symbol/issues/13#issuecomment-164146149\ndefineProperty(\n\tHiddenSymbol.prototype, SymbolPolyfill.toPrimitive,\n\td(\"c\", SymbolPolyfill.prototype[SymbolPolyfill.toPrimitive])\n);\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/polyfill.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-symbol/validate-symbol.js":
+/*!****************************************************!*\
+  !*** ./node_modules/es6-symbol/validate-symbol.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isSymbol = __webpack_require__(/*! ./is-symbol */ \"./node_modules/es6-symbol/is-symbol.js\");\n\nmodule.exports = function (value) {\n\tif (!isSymbol(value)) throw new TypeError(value + \" is not a symbol\");\n\treturn value;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-symbol/validate-symbol.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-template-strings/compile.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es6-template-strings/compile.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar esniff = __webpack_require__(/*! esniff */ \"./node_modules/esniff/index.js\")\n\n  , i, current, literals, substitutions, sOut, sEscape, sAhead, sIn, sInEscape, template;\n\nsOut = function (char) {\n\tif (char === '\\\\') return sEscape;\n\tif (char === '$') return sAhead;\n\tcurrent += char;\n\treturn sOut;\n};\nsEscape = function (char) {\n\tif ((char !== '\\\\') && (char !== '$')) current += '\\\\';\n\tcurrent += char;\n\treturn sOut;\n};\nsAhead = function (char) {\n\tif (char === '{') {\n\t\tliterals.push(current);\n\t\tcurrent = '';\n\t\treturn sIn;\n\t}\n\tif (char === '$') {\n\t\tcurrent += '$';\n\t\treturn sAhead;\n\t}\n\tcurrent += '$' + char;\n\treturn sOut;\n};\nsIn = function (char) {\n\tvar code = template.slice(i), end;\n\tesniff(code, '}', function (j) {\n\t\tif (esniff.nest >= 0) return esniff.next();\n\t\tend = j;\n\t});\n\tif (end != null) {\n\t\tsubstitutions.push(template.slice(i, i + end));\n\t\ti += end;\n\t\tcurrent = '';\n\t\treturn sOut;\n\t}\n\tend = code.length;\n\ti += end;\n\tcurrent += code;\n\treturn sIn;\n};\nsInEscape = function (char) {\n\tif ((char !== '\\\\') && (char !== '}')) current += '\\\\';\n\tcurrent += char;\n\treturn sIn;\n};\n\nmodule.exports = function (str) {\n\tvar length, state, result;\n\tcurrent = '';\n\tliterals = [];\n\tsubstitutions = [];\n\n\ttemplate = String(str);\n\tlength = template.length;\n\n\tstate = sOut;\n\tfor (i = 0; i < length; ++i) state = state(template[i]);\n\tif (state === sOut) {\n\t\tliterals.push(current);\n\t} else if (state === sEscape) {\n\t\tliterals.push(current + '\\\\');\n\t} else if (state === sAhead) {\n\t\tliterals.push(current + '$');\n\t} else if (state === sIn) {\n\t\tliterals[literals.length - 1] += '${' + current;\n\t} else if (state === sInEscape) {\n\t\tliterals[literals.length - 1] += '${' + current + '\\\\';\n\t}\n\tresult = { literals: literals, substitutions: substitutions };\n\tliterals = substitutions = null;\n\treturn result;\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-template-strings/compile.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-template-strings/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/es6-template-strings/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar compile = __webpack_require__(/*! ./compile */ \"./node_modules/es6-template-strings/compile.js\")\n  , resolve = __webpack_require__(/*! ./resolve-to-string */ \"./node_modules/es6-template-strings/resolve-to-string.js\");\n\nmodule.exports = function (template, context/*, options*/) {\n\treturn resolve(compile(template), context, arguments[2]);\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-template-strings/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-template-strings/passthru.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/es6-template-strings/passthru.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar reduce = Array.prototype.reduce;\n\nmodule.exports = function (literals/*, …substitutions*/) {\n\tvar args = arguments;\n\treturn reduce.call(literals, function (a, b, i) {\n\t\treturn a + ((args[i] === undefined) ? '' :  String(args[i])) + b;\n\t});\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-template-strings/passthru.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-template-strings/resolve-to-string.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/es6-template-strings/resolve-to-string.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar resolve  = __webpack_require__(/*! ./resolve */ \"./node_modules/es6-template-strings/resolve.js\")\n  , passthru = __webpack_require__(/*! ./passthru */ \"./node_modules/es6-template-strings/passthru.js\");\n\nmodule.exports = function (data, context/*, options*/) {\n\treturn passthru.apply(null, resolve(data, context, arguments[2]));\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-template-strings/resolve-to-string.js?");
+
+/***/ }),
+
+/***/ "./node_modules/es6-template-strings/resolve.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es6-template-strings/resolve.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar value          = __webpack_require__(/*! es5-ext/object/valid-value */ \"./node_modules/es5-ext/object/valid-value.js\")\n  , normalize      = __webpack_require__(/*! es5-ext/object/normalize-options */ \"./node_modules/es5-ext/object/normalize-options.js\")\n  , isVarNameValid = __webpack_require__(/*! esniff/is-var-name-valid */ \"./node_modules/esniff/is-var-name-valid.js\")\n\n  , map = Array.prototype.map, keys = Object.keys\n  , stringify = JSON.stringify;\n\nmodule.exports = function (data, context/*, options*/) {\n\tvar names, argNames, argValues, options = Object(arguments[2]);\n\n\t(value(data) && value(data.literals) && value(data.substitutions));\n\tcontext = normalize(context);\n\tnames = keys(context).filter(isVarNameValid);\n\targNames = names.join(', ');\n\targValues = names.map(function (name) { return context[name]; });\n\treturn [data.literals].concat(map.call(data.substitutions, function (expr) {\n\t\tvar resolver;\n\t\tif (!expr) return undefined;\n\t\ttry {\n\t\t\tresolver = new Function(argNames, 'return (' + expr + ')');\n\t\t} catch (e) {\n\t\t\tthrow new TypeError(\"Unable to compile expression:\\n\\targs: \" + stringify(argNames) +\n\t\t\t\t\"\\n\\tbody: \" + stringify(expr) + \"\\n\\terror: \" + e.stack);\n\t\t}\n\t\ttry {\n\t\t\treturn resolver.apply(null, argValues);\n\t\t} catch (e) {\n\t\t\tif (options.partial) return '${' + expr + '}';\n\t\t\tthrow new TypeError(\"Unable to resolve expression:\\n\\targs: \" + stringify(argNames) +\n\t\t\t\t\"\\n\\tbody: \" + stringify(expr) + \"\\n\\terror: \" + e.stack);\n\t\t}\n\t}));\n};\n\n\n//# sourceURL=webpack:///./node_modules/es6-template-strings/resolve.js?");
+
+/***/ }),
+
+/***/ "./node_modules/esniff/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/esniff/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar from         = __webpack_require__(/*! es5-ext/array/from */ \"./node_modules/es5-ext/array/from/index.js\")\n  , primitiveSet = __webpack_require__(/*! es5-ext/object/primitive-set */ \"./node_modules/es5-ext/object/primitive-set.js\")\n  , value        = __webpack_require__(/*! es5-ext/object/valid-value */ \"./node_modules/es5-ext/object/valid-value.js\")\n  , callable     = __webpack_require__(/*! es5-ext/object/valid-callable */ \"./node_modules/es5-ext/object/valid-callable.js\")\n  , d            = __webpack_require__(/*! d */ \"./node_modules/d/index.js\")\n  , eolSet       = __webpack_require__(/*! ./lib/ws-eol */ \"./node_modules/esniff/lib/ws-eol.js\")\n  , wsSet        = __webpack_require__(/*! ./lib/ws */ \"./node_modules/esniff/lib/ws.js\")\n\n  , hasOwnProperty = Object.prototype.hasOwnProperty\n  , preRegExpSet = primitiveSet.apply(null, from(';{=([,<>+-*/%&|^!~?:}'))\n  , nonNameSet = primitiveSet.apply(null, from(';{=([,<>+-*/%&|^!~?:})].'))\n\n  , move, startCollect, endCollect, collectNest\n  , $ws, $common, $string, $comment, $multiComment, $regExp\n\n  , i, char, line, columnIndex, afterWs, previousChar\n  , nest, nestedTokens, results\n  , userCode, userTriggerChar, isUserTriggerOperatorChar, userCallback\n\n  , quote\n  , collectIndex, data, nestRelease;\n\nmove = function (j) {\n\tif (!char) return;\n\tif (i >= j) return;\n\twhile (i !== j) {\n\t\tif (!char) return;\n\t\tif (hasOwnProperty.call(wsSet, char)) {\n\t\t\tif (hasOwnProperty.call(eolSet, char)) {\n\t\t\t\tcolumnIndex = i;\n\t\t\t\t++line;\n\t\t\t}\n\t\t} else {\n\t\t\tpreviousChar = char;\n\t\t}\n\t\tchar = userCode[++i];\n\t}\n};\n\nstartCollect = function (oldNestRelease) {\n\tif (collectIndex != null) nestedTokens.push([data, collectIndex, oldNestRelease]);\n\tdata = { point: i + 1, line: line, column: i + 1 - columnIndex };\n\tcollectIndex = i;\n};\n\nendCollect = function () {\n\tvar previous;\n\tdata.raw = userCode.slice(collectIndex, i);\n\tresults.push(data);\n\tif (nestedTokens.length) {\n\t\tprevious = nestedTokens.pop();\n\t\tdata = previous[0];\n\t\tcollectIndex = previous[1];\n\t\tnestRelease = previous[2];\n\t\treturn;\n\t}\n\tdata = null;\n\tcollectIndex = null;\n\tnestRelease = null;\n};\n\ncollectNest = function () {\n\tvar old = nestRelease;\n\tnestRelease = nest;\n\t++nest;\n\tmove(i + 1);\n\tstartCollect(old);\n\treturn $ws;\n};\n\n$common = function () {\n\tif ((char === '\\'') || (char === '\"')) {\n\t\tquote = char;\n\t\tchar = userCode[++i];\n\t\treturn $string;\n\t}\n\tif ((char === '(') || (char === '{') || (char === '[')) {\n\t\t++nest;\n\t} else if ((char === ')') || (char === '}') || (char === ']')) {\n\t\tif (nestRelease === --nest) endCollect();\n\t} else if (char === '/') {\n\t\tif (hasOwnProperty.call(preRegExpSet, previousChar)) {\n\t\t\tchar = userCode[++i];\n\t\t\treturn $regExp;\n\t\t}\n\t}\n\tif ((char !== userTriggerChar) || (!isUserTriggerOperatorChar && previousChar && !afterWs &&\n\t\t\t!hasOwnProperty.call(nonNameSet, previousChar))) {\n\t\tpreviousChar = char;\n\t\tchar = userCode[++i];\n\t\treturn $ws;\n\t}\n\n\treturn userCallback(i, previousChar, nest);\n};\n\n$comment = function () {\n\twhile (true) {\n\t\tif (!char) return;\n\t\tif (hasOwnProperty.call(eolSet, char)) {\n\t\t\tcolumnIndex = i + 1;\n\t\t\t++line;\n\t\t\treturn;\n\t\t}\n\t\tchar = userCode[++i];\n\t}\n};\n\n$multiComment = function () {\n\twhile (true) {\n\t\tif (!char) return;\n\t\tif (char === '*') {\n\t\t\tchar = userCode[++i];\n\t\t\tif (char === '/') return;\n\t\t\tcontinue;\n\t\t}\n\t\tif (hasOwnProperty.call(eolSet, char)) {\n\t\t\tcolumnIndex = i + 1;\n\t\t\t++line;\n\t\t}\n\t\tchar = userCode[++i];\n\t}\n};\n\n$ws = function () {\n\tvar next;\n\tafterWs = false;\n\twhile (true) {\n\t\tif (!char) return;\n\t\tif (hasOwnProperty.call(wsSet, char)) {\n\t\t\tafterWs = true;\n\t\t\tif (hasOwnProperty.call(eolSet, char)) {\n\t\t\t\tcolumnIndex = i + 1;\n\t\t\t\t++line;\n\t\t\t}\n\t\t} else if (char === '/') {\n\t\t\tnext = userCode[i + 1];\n\t\t\tif (next === '/') {\n\t\t\t\tchar = userCode[i += 2];\n\t\t\t\tafterWs = true;\n\t\t\t\t$comment();\n\t\t\t} else if (next === '*') {\n\t\t\t\tchar = userCode[i += 2];\n\t\t\t\tafterWs = true;\n\t\t\t\t$multiComment();\n\t\t\t} else {\n\t\t\t\tbreak;\n\t\t\t}\n\t\t} else {\n\t\t\tbreak;\n\t\t}\n\t\tchar = userCode[++i];\n\t}\n\treturn $common;\n};\n\n$string = function () {\n\twhile (true) {\n\t\tif (!char) return;\n\t\tif (char === quote) {\n\t\t\tchar = userCode[++i];\n\t\t\tpreviousChar = quote;\n\t\t\treturn $ws;\n\t\t}\n\t\tif (char === '\\\\') {\n\t\t\tif (hasOwnProperty.call(eolSet, userCode[++i])) {\n\t\t\t\tcolumnIndex = i + 1;\n\t\t\t\t++line;\n\t\t\t}\n\t\t}\n\t\tchar = userCode[++i];\n\t}\n};\n\n$regExp = function () {\n\twhile (true) {\n\t\tif (!char) return;\n\t\tif (char === '/') {\n\t\t\tpreviousChar = '/';\n\t\t\tchar = userCode[++i];\n\t\t\treturn $ws;\n\t\t}\n\t\tif (char === '\\\\') ++i;\n\t\tchar = userCode[++i];\n\t}\n};\n\nmodule.exports = exports = function (code, triggerChar, callback) {\n\tvar state;\n\n\tuserCode = String(value(code));\n\tuserTriggerChar = String(value(triggerChar));\n\tif (userTriggerChar.length !== 1) {\n\t\tthrow new TypeError(userTriggerChar + \" should be one character long string\");\n\t}\n\tuserCallback = callable(callback);\n\tisUserTriggerOperatorChar = hasOwnProperty.call(nonNameSet, userTriggerChar);\n\ti = 0;\n\tchar = userCode[i];\n\tline = 1;\n\tcolumnIndex = 0;\n\tafterWs = false;\n\tpreviousChar = null;\n\tnest = 0;\n\tnestedTokens = [];\n\tresults = [];\n\texports.forceStop = false;\n\tstate = $ws;\n\twhile (state) state = state();\n\treturn results;\n};\n\nObject.defineProperties(exports, {\n\t$ws: d($ws),\n\t$common: d($common),\n\tcollectNest: d(collectNest),\n\tmove: d(move),\n\tindex: d.gs(function () { return i; }),\n\tline: d.gs(function () { return line; }),\n\tnest: d.gs(function () { return nest; }),\n\tcolumnIndex: d.gs(function () { return columnIndex; }),\n\tnext: d(function (step) {\n\t\tif (!char) return;\n\t\tmove(i + (step || 1));\n\t\treturn $ws();\n\t}),\n\tresume: d(function () { return $common; })\n});\n\n\n//# sourceURL=webpack:///./node_modules/esniff/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/esniff/is-var-name-valid.js":
+/*!**************************************************!*\
+  !*** ./node_modules/esniff/is-var-name-valid.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("// Credit: Mathias Bynens -> https://mathiasbynens.be/demo/javascript-identifier-regex\n\n\n\nmodule.exports = RegExp.prototype.test.bind(/^(?!(?:do|if|in|for|let|new|try|var|case|else|enum|eval|null|this|true|void|with|await|break|catch|class|const|false|super|throw|while|yield|delete|export|import|public|return|static|switch|typeof|default|extends|finally|package|private|continue|debugger|function|arguments|interface|protected|implements|instanceof)$)(?:[\\$A-Z_a-z\\xAA\\xB5\\xBA\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u02C1\\u02C6-\\u02D1\\u02E0-\\u02E4\\u02EC\\u02EE\\u0370-\\u0374\\u0376\\u0377\\u037A-\\u037D\\u037F\\u0386\\u0388-\\u038A\\u038C\\u038E-\\u03A1\\u03A3-\\u03F5\\u03F7-\\u0481\\u048A-\\u052F\\u0531-\\u0556\\u0559\\u0561-\\u0587\\u05D0-\\u05EA\\u05F0-\\u05F2\\u0620-\\u064A\\u066E\\u066F\\u0671-\\u06D3\\u06D5\\u06E5\\u06E6\\u06EE\\u06EF\\u06FA-\\u06FC\\u06FF\\u0710\\u0712-\\u072F\\u074D-\\u07A5\\u07B1\\u07CA-\\u07EA\\u07F4\\u07F5\\u07FA\\u0800-\\u0815\\u081A\\u0824\\u0828\\u0840-\\u0858\\u08A0-\\u08B4\\u08B6-\\u08BD\\u0904-\\u0939\\u093D\\u0950\\u0958-\\u0961\\u0971-\\u0980\\u0985-\\u098C\\u098F\\u0990\\u0993-\\u09A8\\u09AA-\\u09B0\\u09B2\\u09B6-\\u09B9\\u09BD\\u09CE\\u09DC\\u09DD\\u09DF-\\u09E1\\u09F0\\u09F1\\u0A05-\\u0A0A\\u0A0F\\u0A10\\u0A13-\\u0A28\\u0A2A-\\u0A30\\u0A32\\u0A33\\u0A35\\u0A36\\u0A38\\u0A39\\u0A59-\\u0A5C\\u0A5E\\u0A72-\\u0A74\\u0A85-\\u0A8D\\u0A8F-\\u0A91\\u0A93-\\u0AA8\\u0AAA-\\u0AB0\\u0AB2\\u0AB3\\u0AB5-\\u0AB9\\u0ABD\\u0AD0\\u0AE0\\u0AE1\\u0AF9\\u0B05-\\u0B0C\\u0B0F\\u0B10\\u0B13-\\u0B28\\u0B2A-\\u0B30\\u0B32\\u0B33\\u0B35-\\u0B39\\u0B3D\\u0B5C\\u0B5D\\u0B5F-\\u0B61\\u0B71\\u0B83\\u0B85-\\u0B8A\\u0B8E-\\u0B90\\u0B92-\\u0B95\\u0B99\\u0B9A\\u0B9C\\u0B9E\\u0B9F\\u0BA3\\u0BA4\\u0BA8-\\u0BAA\\u0BAE-\\u0BB9\\u0BD0\\u0C05-\\u0C0C\\u0C0E-\\u0C10\\u0C12-\\u0C28\\u0C2A-\\u0C39\\u0C3D\\u0C58-\\u0C5A\\u0C60\\u0C61\\u0C80\\u0C85-\\u0C8C\\u0C8E-\\u0C90\\u0C92-\\u0CA8\\u0CAA-\\u0CB3\\u0CB5-\\u0CB9\\u0CBD\\u0CDE\\u0CE0\\u0CE1\\u0CF1\\u0CF2\\u0D05-\\u0D0C\\u0D0E-\\u0D10\\u0D12-\\u0D3A\\u0D3D\\u0D4E\\u0D54-\\u0D56\\u0D5F-\\u0D61\\u0D7A-\\u0D7F\\u0D85-\\u0D96\\u0D9A-\\u0DB1\\u0DB3-\\u0DBB\\u0DBD\\u0DC0-\\u0DC6\\u0E01-\\u0E30\\u0E32\\u0E33\\u0E40-\\u0E46\\u0E81\\u0E82\\u0E84\\u0E87\\u0E88\\u0E8A\\u0E8D\\u0E94-\\u0E97\\u0E99-\\u0E9F\\u0EA1-\\u0EA3\\u0EA5\\u0EA7\\u0EAA\\u0EAB\\u0EAD-\\u0EB0\\u0EB2\\u0EB3\\u0EBD\\u0EC0-\\u0EC4\\u0EC6\\u0EDC-\\u0EDF\\u0F00\\u0F40-\\u0F47\\u0F49-\\u0F6C\\u0F88-\\u0F8C\\u1000-\\u102A\\u103F\\u1050-\\u1055\\u105A-\\u105D\\u1061\\u1065\\u1066\\u106E-\\u1070\\u1075-\\u1081\\u108E\\u10A0-\\u10C5\\u10C7\\u10CD\\u10D0-\\u10FA\\u10FC-\\u1248\\u124A-\\u124D\\u1250-\\u1256\\u1258\\u125A-\\u125D\\u1260-\\u1288\\u128A-\\u128D\\u1290-\\u12B0\\u12B2-\\u12B5\\u12B8-\\u12BE\\u12C0\\u12C2-\\u12C5\\u12C8-\\u12D6\\u12D8-\\u1310\\u1312-\\u1315\\u1318-\\u135A\\u1380-\\u138F\\u13A0-\\u13F5\\u13F8-\\u13FD\\u1401-\\u166C\\u166F-\\u167F\\u1681-\\u169A\\u16A0-\\u16EA\\u16EE-\\u16F8\\u1700-\\u170C\\u170E-\\u1711\\u1720-\\u1731\\u1740-\\u1751\\u1760-\\u176C\\u176E-\\u1770\\u1780-\\u17B3\\u17D7\\u17DC\\u1820-\\u1877\\u1880-\\u18A8\\u18AA\\u18B0-\\u18F5\\u1900-\\u191E\\u1950-\\u196D\\u1970-\\u1974\\u1980-\\u19AB\\u19B0-\\u19C9\\u1A00-\\u1A16\\u1A20-\\u1A54\\u1AA7\\u1B05-\\u1B33\\u1B45-\\u1B4B\\u1B83-\\u1BA0\\u1BAE\\u1BAF\\u1BBA-\\u1BE5\\u1C00-\\u1C23\\u1C4D-\\u1C4F\\u1C5A-\\u1C7D\\u1C80-\\u1C88\\u1CE9-\\u1CEC\\u1CEE-\\u1CF1\\u1CF5\\u1CF6\\u1D00-\\u1DBF\\u1E00-\\u1F15\\u1F18-\\u1F1D\\u1F20-\\u1F45\\u1F48-\\u1F4D\\u1F50-\\u1F57\\u1F59\\u1F5B\\u1F5D\\u1F5F-\\u1F7D\\u1F80-\\u1FB4\\u1FB6-\\u1FBC\\u1FBE\\u1FC2-\\u1FC4\\u1FC6-\\u1FCC\\u1FD0-\\u1FD3\\u1FD6-\\u1FDB\\u1FE0-\\u1FEC\\u1FF2-\\u1FF4\\u1FF6-\\u1FFC\\u2071\\u207F\\u2090-\\u209C\\u2102\\u2107\\u210A-\\u2113\\u2115\\u2118-\\u211D\\u2124\\u2126\\u2128\\u212A-\\u2139\\u213C-\\u213F\\u2145-\\u2149\\u214E\\u2160-\\u2188\\u2C00-\\u2C2E\\u2C30-\\u2C5E\\u2C60-\\u2CE4\\u2CEB-\\u2CEE\\u2CF2\\u2CF3\\u2D00-\\u2D25\\u2D27\\u2D2D\\u2D30-\\u2D67\\u2D6F\\u2D80-\\u2D96\\u2DA0-\\u2DA6\\u2DA8-\\u2DAE\\u2DB0-\\u2DB6\\u2DB8-\\u2DBE\\u2DC0-\\u2DC6\\u2DC8-\\u2DCE\\u2DD0-\\u2DD6\\u2DD8-\\u2DDE\\u3005-\\u3007\\u3021-\\u3029\\u3031-\\u3035\\u3038-\\u303C\\u3041-\\u3096\\u309B-\\u309F\\u30A1-\\u30FA\\u30FC-\\u30FF\\u3105-\\u312D\\u3131-\\u318E\\u31A0-\\u31BA\\u31F0-\\u31FF\\u3400-\\u4DB5\\u4E00-\\u9FD5\\uA000-\\uA48C\\uA4D0-\\uA4FD\\uA500-\\uA60C\\uA610-\\uA61F\\uA62A\\uA62B\\uA640-\\uA66E\\uA67F-\\uA69D\\uA6A0-\\uA6EF\\uA717-\\uA71F\\uA722-\\uA788\\uA78B-\\uA7AE\\uA7B0-\\uA7B7\\uA7F7-\\uA801\\uA803-\\uA805\\uA807-\\uA80A\\uA80C-\\uA822\\uA840-\\uA873\\uA882-\\uA8B3\\uA8F2-\\uA8F7\\uA8FB\\uA8FD\\uA90A-\\uA925\\uA930-\\uA946\\uA960-\\uA97C\\uA984-\\uA9B2\\uA9CF\\uA9E0-\\uA9E4\\uA9E6-\\uA9EF\\uA9FA-\\uA9FE\\uAA00-\\uAA28\\uAA40-\\uAA42\\uAA44-\\uAA4B\\uAA60-\\uAA76\\uAA7A\\uAA7E-\\uAAAF\\uAAB1\\uAAB5\\uAAB6\\uAAB9-\\uAABD\\uAAC0\\uAAC2\\uAADB-\\uAADD\\uAAE0-\\uAAEA\\uAAF2-\\uAAF4\\uAB01-\\uAB06\\uAB09-\\uAB0E\\uAB11-\\uAB16\\uAB20-\\uAB26\\uAB28-\\uAB2E\\uAB30-\\uAB5A\\uAB5C-\\uAB65\\uAB70-\\uABE2\\uAC00-\\uD7A3\\uD7B0-\\uD7C6\\uD7CB-\\uD7FB\\uF900-\\uFA6D\\uFA70-\\uFAD9\\uFB00-\\uFB06\\uFB13-\\uFB17\\uFB1D\\uFB1F-\\uFB28\\uFB2A-\\uFB36\\uFB38-\\uFB3C\\uFB3E\\uFB40\\uFB41\\uFB43\\uFB44\\uFB46-\\uFBB1\\uFBD3-\\uFD3D\\uFD50-\\uFD8F\\uFD92-\\uFDC7\\uFDF0-\\uFDFB\\uFE70-\\uFE74\\uFE76-\\uFEFC\\uFF21-\\uFF3A\\uFF41-\\uFF5A\\uFF66-\\uFFBE\\uFFC2-\\uFFC7\\uFFCA-\\uFFCF\\uFFD2-\\uFFD7\\uFFDA-\\uFFDC]|\\uD800[\\uDC00-\\uDC0B\\uDC0D-\\uDC26\\uDC28-\\uDC3A\\uDC3C\\uDC3D\\uDC3F-\\uDC4D\\uDC50-\\uDC5D\\uDC80-\\uDCFA\\uDD40-\\uDD74\\uDE80-\\uDE9C\\uDEA0-\\uDED0\\uDF00-\\uDF1F\\uDF30-\\uDF4A\\uDF50-\\uDF75\\uDF80-\\uDF9D\\uDFA0-\\uDFC3\\uDFC8-\\uDFCF\\uDFD1-\\uDFD5]|\\uD801[\\uDC00-\\uDC9D\\uDCB0-\\uDCD3\\uDCD8-\\uDCFB\\uDD00-\\uDD27\\uDD30-\\uDD63\\uDE00-\\uDF36\\uDF40-\\uDF55\\uDF60-\\uDF67]|\\uD802[\\uDC00-\\uDC05\\uDC08\\uDC0A-\\uDC35\\uDC37\\uDC38\\uDC3C\\uDC3F-\\uDC55\\uDC60-\\uDC76\\uDC80-\\uDC9E\\uDCE0-\\uDCF2\\uDCF4\\uDCF5\\uDD00-\\uDD15\\uDD20-\\uDD39\\uDD80-\\uDDB7\\uDDBE\\uDDBF\\uDE00\\uDE10-\\uDE13\\uDE15-\\uDE17\\uDE19-\\uDE33\\uDE60-\\uDE7C\\uDE80-\\uDE9C\\uDEC0-\\uDEC7\\uDEC9-\\uDEE4\\uDF00-\\uDF35\\uDF40-\\uDF55\\uDF60-\\uDF72\\uDF80-\\uDF91]|\\uD803[\\uDC00-\\uDC48\\uDC80-\\uDCB2\\uDCC0-\\uDCF2]|\\uD804[\\uDC03-\\uDC37\\uDC83-\\uDCAF\\uDCD0-\\uDCE8\\uDD03-\\uDD26\\uDD50-\\uDD72\\uDD76\\uDD83-\\uDDB2\\uDDC1-\\uDDC4\\uDDDA\\uDDDC\\uDE00-\\uDE11\\uDE13-\\uDE2B\\uDE80-\\uDE86\\uDE88\\uDE8A-\\uDE8D\\uDE8F-\\uDE9D\\uDE9F-\\uDEA8\\uDEB0-\\uDEDE\\uDF05-\\uDF0C\\uDF0F\\uDF10\\uDF13-\\uDF28\\uDF2A-\\uDF30\\uDF32\\uDF33\\uDF35-\\uDF39\\uDF3D\\uDF50\\uDF5D-\\uDF61]|\\uD805[\\uDC00-\\uDC34\\uDC47-\\uDC4A\\uDC80-\\uDCAF\\uDCC4\\uDCC5\\uDCC7\\uDD80-\\uDDAE\\uDDD8-\\uDDDB\\uDE00-\\uDE2F\\uDE44\\uDE80-\\uDEAA\\uDF00-\\uDF19]|\\uD806[\\uDCA0-\\uDCDF\\uDCFF\\uDEC0-\\uDEF8]|\\uD807[\\uDC00-\\uDC08\\uDC0A-\\uDC2E\\uDC40\\uDC72-\\uDC8F]|\\uD808[\\uDC00-\\uDF99]|\\uD809[\\uDC00-\\uDC6E\\uDC80-\\uDD43]|[\\uD80C\\uD81C-\\uD820\\uD840-\\uD868\\uD86A-\\uD86C\\uD86F-\\uD872][\\uDC00-\\uDFFF]|\\uD80D[\\uDC00-\\uDC2E]|\\uD811[\\uDC00-\\uDE46]|\\uD81A[\\uDC00-\\uDE38\\uDE40-\\uDE5E\\uDED0-\\uDEED\\uDF00-\\uDF2F\\uDF40-\\uDF43\\uDF63-\\uDF77\\uDF7D-\\uDF8F]|\\uD81B[\\uDF00-\\uDF44\\uDF50\\uDF93-\\uDF9F\\uDFE0]|\\uD821[\\uDC00-\\uDFEC]|\\uD822[\\uDC00-\\uDEF2]|\\uD82C[\\uDC00\\uDC01]|\\uD82F[\\uDC00-\\uDC6A\\uDC70-\\uDC7C\\uDC80-\\uDC88\\uDC90-\\uDC99]|\\uD835[\\uDC00-\\uDC54\\uDC56-\\uDC9C\\uDC9E\\uDC9F\\uDCA2\\uDCA5\\uDCA6\\uDCA9-\\uDCAC\\uDCAE-\\uDCB9\\uDCBB\\uDCBD-\\uDCC3\\uDCC5-\\uDD05\\uDD07-\\uDD0A\\uDD0D-\\uDD14\\uDD16-\\uDD1C\\uDD1E-\\uDD39\\uDD3B-\\uDD3E\\uDD40-\\uDD44\\uDD46\\uDD4A-\\uDD50\\uDD52-\\uDEA5\\uDEA8-\\uDEC0\\uDEC2-\\uDEDA\\uDEDC-\\uDEFA\\uDEFC-\\uDF14\\uDF16-\\uDF34\\uDF36-\\uDF4E\\uDF50-\\uDF6E\\uDF70-\\uDF88\\uDF8A-\\uDFA8\\uDFAA-\\uDFC2\\uDFC4-\\uDFCB]|\\uD83A[\\uDC00-\\uDCC4\\uDD00-\\uDD43]|\\uD83B[\\uDE00-\\uDE03\\uDE05-\\uDE1F\\uDE21\\uDE22\\uDE24\\uDE27\\uDE29-\\uDE32\\uDE34-\\uDE37\\uDE39\\uDE3B\\uDE42\\uDE47\\uDE49\\uDE4B\\uDE4D-\\uDE4F\\uDE51\\uDE52\\uDE54\\uDE57\\uDE59\\uDE5B\\uDE5D\\uDE5F\\uDE61\\uDE62\\uDE64\\uDE67-\\uDE6A\\uDE6C-\\uDE72\\uDE74-\\uDE77\\uDE79-\\uDE7C\\uDE7E\\uDE80-\\uDE89\\uDE8B-\\uDE9B\\uDEA1-\\uDEA3\\uDEA5-\\uDEA9\\uDEAB-\\uDEBB]|\\uD869[\\uDC00-\\uDED6\\uDF00-\\uDFFF]|\\uD86D[\\uDC00-\\uDF34\\uDF40-\\uDFFF]|\\uD86E[\\uDC00-\\uDC1D\\uDC20-\\uDFFF]|\\uD873[\\uDC00-\\uDEA1]|\\uD87E[\\uDC00-\\uDE1D])(?:[\\$0-9A-Z_a-z\\xAA\\xB5\\xB7\\xBA\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u02C1\\u02C6-\\u02D1\\u02E0-\\u02E4\\u02EC\\u02EE\\u0300-\\u0374\\u0376\\u0377\\u037A-\\u037D\\u037F\\u0386-\\u038A\\u038C\\u038E-\\u03A1\\u03A3-\\u03F5\\u03F7-\\u0481\\u0483-\\u0487\\u048A-\\u052F\\u0531-\\u0556\\u0559\\u0561-\\u0587\\u0591-\\u05BD\\u05BF\\u05C1\\u05C2\\u05C4\\u05C5\\u05C7\\u05D0-\\u05EA\\u05F0-\\u05F2\\u0610-\\u061A\\u0620-\\u0669\\u066E-\\u06D3\\u06D5-\\u06DC\\u06DF-\\u06E8\\u06EA-\\u06FC\\u06FF\\u0710-\\u074A\\u074D-\\u07B1\\u07C0-\\u07F5\\u07FA\\u0800-\\u082D\\u0840-\\u085B\\u08A0-\\u08B4\\u08B6-\\u08BD\\u08D4-\\u08E1\\u08E3-\\u0963\\u0966-\\u096F\\u0971-\\u0983\\u0985-\\u098C\\u098F\\u0990\\u0993-\\u09A8\\u09AA-\\u09B0\\u09B2\\u09B6-\\u09B9\\u09BC-\\u09C4\\u09C7\\u09C8\\u09CB-\\u09CE\\u09D7\\u09DC\\u09DD\\u09DF-\\u09E3\\u09E6-\\u09F1\\u0A01-\\u0A03\\u0A05-\\u0A0A\\u0A0F\\u0A10\\u0A13-\\u0A28\\u0A2A-\\u0A30\\u0A32\\u0A33\\u0A35\\u0A36\\u0A38\\u0A39\\u0A3C\\u0A3E-\\u0A42\\u0A47\\u0A48\\u0A4B-\\u0A4D\\u0A51\\u0A59-\\u0A5C\\u0A5E\\u0A66-\\u0A75\\u0A81-\\u0A83\\u0A85-\\u0A8D\\u0A8F-\\u0A91\\u0A93-\\u0AA8\\u0AAA-\\u0AB0\\u0AB2\\u0AB3\\u0AB5-\\u0AB9\\u0ABC-\\u0AC5\\u0AC7-\\u0AC9\\u0ACB-\\u0ACD\\u0AD0\\u0AE0-\\u0AE3\\u0AE6-\\u0AEF\\u0AF9\\u0B01-\\u0B03\\u0B05-\\u0B0C\\u0B0F\\u0B10\\u0B13-\\u0B28\\u0B2A-\\u0B30\\u0B32\\u0B33\\u0B35-\\u0B39\\u0B3C-\\u0B44\\u0B47\\u0B48\\u0B4B-\\u0B4D\\u0B56\\u0B57\\u0B5C\\u0B5D\\u0B5F-\\u0B63\\u0B66-\\u0B6F\\u0B71\\u0B82\\u0B83\\u0B85-\\u0B8A\\u0B8E-\\u0B90\\u0B92-\\u0B95\\u0B99\\u0B9A\\u0B9C\\u0B9E\\u0B9F\\u0BA3\\u0BA4\\u0BA8-\\u0BAA\\u0BAE-\\u0BB9\\u0BBE-\\u0BC2\\u0BC6-\\u0BC8\\u0BCA-\\u0BCD\\u0BD0\\u0BD7\\u0BE6-\\u0BEF\\u0C00-\\u0C03\\u0C05-\\u0C0C\\u0C0E-\\u0C10\\u0C12-\\u0C28\\u0C2A-\\u0C39\\u0C3D-\\u0C44\\u0C46-\\u0C48\\u0C4A-\\u0C4D\\u0C55\\u0C56\\u0C58-\\u0C5A\\u0C60-\\u0C63\\u0C66-\\u0C6F\\u0C80-\\u0C83\\u0C85-\\u0C8C\\u0C8E-\\u0C90\\u0C92-\\u0CA8\\u0CAA-\\u0CB3\\u0CB5-\\u0CB9\\u0CBC-\\u0CC4\\u0CC6-\\u0CC8\\u0CCA-\\u0CCD\\u0CD5\\u0CD6\\u0CDE\\u0CE0-\\u0CE3\\u0CE6-\\u0CEF\\u0CF1\\u0CF2\\u0D01-\\u0D03\\u0D05-\\u0D0C\\u0D0E-\\u0D10\\u0D12-\\u0D3A\\u0D3D-\\u0D44\\u0D46-\\u0D48\\u0D4A-\\u0D4E\\u0D54-\\u0D57\\u0D5F-\\u0D63\\u0D66-\\u0D6F\\u0D7A-\\u0D7F\\u0D82\\u0D83\\u0D85-\\u0D96\\u0D9A-\\u0DB1\\u0DB3-\\u0DBB\\u0DBD\\u0DC0-\\u0DC6\\u0DCA\\u0DCF-\\u0DD4\\u0DD6\\u0DD8-\\u0DDF\\u0DE6-\\u0DEF\\u0DF2\\u0DF3\\u0E01-\\u0E3A\\u0E40-\\u0E4E\\u0E50-\\u0E59\\u0E81\\u0E82\\u0E84\\u0E87\\u0E88\\u0E8A\\u0E8D\\u0E94-\\u0E97\\u0E99-\\u0E9F\\u0EA1-\\u0EA3\\u0EA5\\u0EA7\\u0EAA\\u0EAB\\u0EAD-\\u0EB9\\u0EBB-\\u0EBD\\u0EC0-\\u0EC4\\u0EC6\\u0EC8-\\u0ECD\\u0ED0-\\u0ED9\\u0EDC-\\u0EDF\\u0F00\\u0F18\\u0F19\\u0F20-\\u0F29\\u0F35\\u0F37\\u0F39\\u0F3E-\\u0F47\\u0F49-\\u0F6C\\u0F71-\\u0F84\\u0F86-\\u0F97\\u0F99-\\u0FBC\\u0FC6\\u1000-\\u1049\\u1050-\\u109D\\u10A0-\\u10C5\\u10C7\\u10CD\\u10D0-\\u10FA\\u10FC-\\u1248\\u124A-\\u124D\\u1250-\\u1256\\u1258\\u125A-\\u125D\\u1260-\\u1288\\u128A-\\u128D\\u1290-\\u12B0\\u12B2-\\u12B5\\u12B8-\\u12BE\\u12C0\\u12C2-\\u12C5\\u12C8-\\u12D6\\u12D8-\\u1310\\u1312-\\u1315\\u1318-\\u135A\\u135D-\\u135F\\u1369-\\u1371\\u1380-\\u138F\\u13A0-\\u13F5\\u13F8-\\u13FD\\u1401-\\u166C\\u166F-\\u167F\\u1681-\\u169A\\u16A0-\\u16EA\\u16EE-\\u16F8\\u1700-\\u170C\\u170E-\\u1714\\u1720-\\u1734\\u1740-\\u1753\\u1760-\\u176C\\u176E-\\u1770\\u1772\\u1773\\u1780-\\u17D3\\u17D7\\u17DC\\u17DD\\u17E0-\\u17E9\\u180B-\\u180D\\u1810-\\u1819\\u1820-\\u1877\\u1880-\\u18AA\\u18B0-\\u18F5\\u1900-\\u191E\\u1920-\\u192B\\u1930-\\u193B\\u1946-\\u196D\\u1970-\\u1974\\u1980-\\u19AB\\u19B0-\\u19C9\\u19D0-\\u19DA\\u1A00-\\u1A1B\\u1A20-\\u1A5E\\u1A60-\\u1A7C\\u1A7F-\\u1A89\\u1A90-\\u1A99\\u1AA7\\u1AB0-\\u1ABD\\u1B00-\\u1B4B\\u1B50-\\u1B59\\u1B6B-\\u1B73\\u1B80-\\u1BF3\\u1C00-\\u1C37\\u1C40-\\u1C49\\u1C4D-\\u1C7D\\u1C80-\\u1C88\\u1CD0-\\u1CD2\\u1CD4-\\u1CF6\\u1CF8\\u1CF9\\u1D00-\\u1DF5\\u1DFB-\\u1F15\\u1F18-\\u1F1D\\u1F20-\\u1F45\\u1F48-\\u1F4D\\u1F50-\\u1F57\\u1F59\\u1F5B\\u1F5D\\u1F5F-\\u1F7D\\u1F80-\\u1FB4\\u1FB6-\\u1FBC\\u1FBE\\u1FC2-\\u1FC4\\u1FC6-\\u1FCC\\u1FD0-\\u1FD3\\u1FD6-\\u1FDB\\u1FE0-\\u1FEC\\u1FF2-\\u1FF4\\u1FF6-\\u1FFC\\u200C\\u200D\\u203F\\u2040\\u2054\\u2071\\u207F\\u2090-\\u209C\\u20D0-\\u20DC\\u20E1\\u20E5-\\u20F0\\u2102\\u2107\\u210A-\\u2113\\u2115\\u2118-\\u211D\\u2124\\u2126\\u2128\\u212A-\\u2139\\u213C-\\u213F\\u2145-\\u2149\\u214E\\u2160-\\u2188\\u2C00-\\u2C2E\\u2C30-\\u2C5E\\u2C60-\\u2CE4\\u2CEB-\\u2CF3\\u2D00-\\u2D25\\u2D27\\u2D2D\\u2D30-\\u2D67\\u2D6F\\u2D7F-\\u2D96\\u2DA0-\\u2DA6\\u2DA8-\\u2DAE\\u2DB0-\\u2DB6\\u2DB8-\\u2DBE\\u2DC0-\\u2DC6\\u2DC8-\\u2DCE\\u2DD0-\\u2DD6\\u2DD8-\\u2DDE\\u2DE0-\\u2DFF\\u3005-\\u3007\\u3021-\\u302F\\u3031-\\u3035\\u3038-\\u303C\\u3041-\\u3096\\u3099-\\u309F\\u30A1-\\u30FA\\u30FC-\\u30FF\\u3105-\\u312D\\u3131-\\u318E\\u31A0-\\u31BA\\u31F0-\\u31FF\\u3400-\\u4DB5\\u4E00-\\u9FD5\\uA000-\\uA48C\\uA4D0-\\uA4FD\\uA500-\\uA60C\\uA610-\\uA62B\\uA640-\\uA66F\\uA674-\\uA67D\\uA67F-\\uA6F1\\uA717-\\uA71F\\uA722-\\uA788\\uA78B-\\uA7AE\\uA7B0-\\uA7B7\\uA7F7-\\uA827\\uA840-\\uA873\\uA880-\\uA8C5\\uA8D0-\\uA8D9\\uA8E0-\\uA8F7\\uA8FB\\uA8FD\\uA900-\\uA92D\\uA930-\\uA953\\uA960-\\uA97C\\uA980-\\uA9C0\\uA9CF-\\uA9D9\\uA9E0-\\uA9FE\\uAA00-\\uAA36\\uAA40-\\uAA4D\\uAA50-\\uAA59\\uAA60-\\uAA76\\uAA7A-\\uAAC2\\uAADB-\\uAADD\\uAAE0-\\uAAEF\\uAAF2-\\uAAF6\\uAB01-\\uAB06\\uAB09-\\uAB0E\\uAB11-\\uAB16\\uAB20-\\uAB26\\uAB28-\\uAB2E\\uAB30-\\uAB5A\\uAB5C-\\uAB65\\uAB70-\\uABEA\\uABEC\\uABED\\uABF0-\\uABF9\\uAC00-\\uD7A3\\uD7B0-\\uD7C6\\uD7CB-\\uD7FB\\uF900-\\uFA6D\\uFA70-\\uFAD9\\uFB00-\\uFB06\\uFB13-\\uFB17\\uFB1D-\\uFB28\\uFB2A-\\uFB36\\uFB38-\\uFB3C\\uFB3E\\uFB40\\uFB41\\uFB43\\uFB44\\uFB46-\\uFBB1\\uFBD3-\\uFD3D\\uFD50-\\uFD8F\\uFD92-\\uFDC7\\uFDF0-\\uFDFB\\uFE00-\\uFE0F\\uFE20-\\uFE2F\\uFE33\\uFE34\\uFE4D-\\uFE4F\\uFE70-\\uFE74\\uFE76-\\uFEFC\\uFF10-\\uFF19\\uFF21-\\uFF3A\\uFF3F\\uFF41-\\uFF5A\\uFF66-\\uFFBE\\uFFC2-\\uFFC7\\uFFCA-\\uFFCF\\uFFD2-\\uFFD7\\uFFDA-\\uFFDC]|\\uD800[\\uDC00-\\uDC0B\\uDC0D-\\uDC26\\uDC28-\\uDC3A\\uDC3C\\uDC3D\\uDC3F-\\uDC4D\\uDC50-\\uDC5D\\uDC80-\\uDCFA\\uDD40-\\uDD74\\uDDFD\\uDE80-\\uDE9C\\uDEA0-\\uDED0\\uDEE0\\uDF00-\\uDF1F\\uDF30-\\uDF4A\\uDF50-\\uDF7A\\uDF80-\\uDF9D\\uDFA0-\\uDFC3\\uDFC8-\\uDFCF\\uDFD1-\\uDFD5]|\\uD801[\\uDC00-\\uDC9D\\uDCA0-\\uDCA9\\uDCB0-\\uDCD3\\uDCD8-\\uDCFB\\uDD00-\\uDD27\\uDD30-\\uDD63\\uDE00-\\uDF36\\uDF40-\\uDF55\\uDF60-\\uDF67]|\\uD802[\\uDC00-\\uDC05\\uDC08\\uDC0A-\\uDC35\\uDC37\\uDC38\\uDC3C\\uDC3F-\\uDC55\\uDC60-\\uDC76\\uDC80-\\uDC9E\\uDCE0-\\uDCF2\\uDCF4\\uDCF5\\uDD00-\\uDD15\\uDD20-\\uDD39\\uDD80-\\uDDB7\\uDDBE\\uDDBF\\uDE00-\\uDE03\\uDE05\\uDE06\\uDE0C-\\uDE13\\uDE15-\\uDE17\\uDE19-\\uDE33\\uDE38-\\uDE3A\\uDE3F\\uDE60-\\uDE7C\\uDE80-\\uDE9C\\uDEC0-\\uDEC7\\uDEC9-\\uDEE6\\uDF00-\\uDF35\\uDF40-\\uDF55\\uDF60-\\uDF72\\uDF80-\\uDF91]|\\uD803[\\uDC00-\\uDC48\\uDC80-\\uDCB2\\uDCC0-\\uDCF2]|\\uD804[\\uDC00-\\uDC46\\uDC66-\\uDC6F\\uDC7F-\\uDCBA\\uDCD0-\\uDCE8\\uDCF0-\\uDCF9\\uDD00-\\uDD34\\uDD36-\\uDD3F\\uDD50-\\uDD73\\uDD76\\uDD80-\\uDDC4\\uDDCA-\\uDDCC\\uDDD0-\\uDDDA\\uDDDC\\uDE00-\\uDE11\\uDE13-\\uDE37\\uDE3E\\uDE80-\\uDE86\\uDE88\\uDE8A-\\uDE8D\\uDE8F-\\uDE9D\\uDE9F-\\uDEA8\\uDEB0-\\uDEEA\\uDEF0-\\uDEF9\\uDF00-\\uDF03\\uDF05-\\uDF0C\\uDF0F\\uDF10\\uDF13-\\uDF28\\uDF2A-\\uDF30\\uDF32\\uDF33\\uDF35-\\uDF39\\uDF3C-\\uDF44\\uDF47\\uDF48\\uDF4B-\\uDF4D\\uDF50\\uDF57\\uDF5D-\\uDF63\\uDF66-\\uDF6C\\uDF70-\\uDF74]|\\uD805[\\uDC00-\\uDC4A\\uDC50-\\uDC59\\uDC80-\\uDCC5\\uDCC7\\uDCD0-\\uDCD9\\uDD80-\\uDDB5\\uDDB8-\\uDDC0\\uDDD8-\\uDDDD\\uDE00-\\uDE40\\uDE44\\uDE50-\\uDE59\\uDE80-\\uDEB7\\uDEC0-\\uDEC9\\uDF00-\\uDF19\\uDF1D-\\uDF2B\\uDF30-\\uDF39]|\\uD806[\\uDCA0-\\uDCE9\\uDCFF\\uDEC0-\\uDEF8]|\\uD807[\\uDC00-\\uDC08\\uDC0A-\\uDC36\\uDC38-\\uDC40\\uDC50-\\uDC59\\uDC72-\\uDC8F\\uDC92-\\uDCA7\\uDCA9-\\uDCB6]|\\uD808[\\uDC00-\\uDF99]|\\uD809[\\uDC00-\\uDC6E\\uDC80-\\uDD43]|[\\uD80C\\uD81C-\\uD820\\uD840-\\uD868\\uD86A-\\uD86C\\uD86F-\\uD872][\\uDC00-\\uDFFF]|\\uD80D[\\uDC00-\\uDC2E]|\\uD811[\\uDC00-\\uDE46]|\\uD81A[\\uDC00-\\uDE38\\uDE40-\\uDE5E\\uDE60-\\uDE69\\uDED0-\\uDEED\\uDEF0-\\uDEF4\\uDF00-\\uDF36\\uDF40-\\uDF43\\uDF50-\\uDF59\\uDF63-\\uDF77\\uDF7D-\\uDF8F]|\\uD81B[\\uDF00-\\uDF44\\uDF50-\\uDF7E\\uDF8F-\\uDF9F\\uDFE0]|\\uD821[\\uDC00-\\uDFEC]|\\uD822[\\uDC00-\\uDEF2]|\\uD82C[\\uDC00\\uDC01]|\\uD82F[\\uDC00-\\uDC6A\\uDC70-\\uDC7C\\uDC80-\\uDC88\\uDC90-\\uDC99\\uDC9D\\uDC9E]|\\uD834[\\uDD65-\\uDD69\\uDD6D-\\uDD72\\uDD7B-\\uDD82\\uDD85-\\uDD8B\\uDDAA-\\uDDAD\\uDE42-\\uDE44]|\\uD835[\\uDC00-\\uDC54\\uDC56-\\uDC9C\\uDC9E\\uDC9F\\uDCA2\\uDCA5\\uDCA6\\uDCA9-\\uDCAC\\uDCAE-\\uDCB9\\uDCBB\\uDCBD-\\uDCC3\\uDCC5-\\uDD05\\uDD07-\\uDD0A\\uDD0D-\\uDD14\\uDD16-\\uDD1C\\uDD1E-\\uDD39\\uDD3B-\\uDD3E\\uDD40-\\uDD44\\uDD46\\uDD4A-\\uDD50\\uDD52-\\uDEA5\\uDEA8-\\uDEC0\\uDEC2-\\uDEDA\\uDEDC-\\uDEFA\\uDEFC-\\uDF14\\uDF16-\\uDF34\\uDF36-\\uDF4E\\uDF50-\\uDF6E\\uDF70-\\uDF88\\uDF8A-\\uDFA8\\uDFAA-\\uDFC2\\uDFC4-\\uDFCB\\uDFCE-\\uDFFF]|\\uD836[\\uDE00-\\uDE36\\uDE3B-\\uDE6C\\uDE75\\uDE84\\uDE9B-\\uDE9F\\uDEA1-\\uDEAF]|\\uD838[\\uDC00-\\uDC06\\uDC08-\\uDC18\\uDC1B-\\uDC21\\uDC23\\uDC24\\uDC26-\\uDC2A]|\\uD83A[\\uDC00-\\uDCC4\\uDCD0-\\uDCD6\\uDD00-\\uDD4A\\uDD50-\\uDD59]|\\uD83B[\\uDE00-\\uDE03\\uDE05-\\uDE1F\\uDE21\\uDE22\\uDE24\\uDE27\\uDE29-\\uDE32\\uDE34-\\uDE37\\uDE39\\uDE3B\\uDE42\\uDE47\\uDE49\\uDE4B\\uDE4D-\\uDE4F\\uDE51\\uDE52\\uDE54\\uDE57\\uDE59\\uDE5B\\uDE5D\\uDE5F\\uDE61\\uDE62\\uDE64\\uDE67-\\uDE6A\\uDE6C-\\uDE72\\uDE74-\\uDE77\\uDE79-\\uDE7C\\uDE7E\\uDE80-\\uDE89\\uDE8B-\\uDE9B\\uDEA1-\\uDEA3\\uDEA5-\\uDEA9\\uDEAB-\\uDEBB]|\\uD869[\\uDC00-\\uDED6\\uDF00-\\uDFFF]|\\uD86D[\\uDC00-\\uDF34\\uDF40-\\uDFFF]|\\uD86E[\\uDC00-\\uDC1D\\uDC20-\\uDFFF]|\\uD873[\\uDC00-\\uDEA1]|\\uD87E[\\uDC00-\\uDE1D]|\\uDB40[\\uDD00-\\uDDEF])*$/);\n\n\n//# sourceURL=webpack:///./node_modules/esniff/is-var-name-valid.js?");
+
+/***/ }),
+
+/***/ "./node_modules/esniff/lib/ws-eol.js":
+/*!*******************************************!*\
+  !*** ./node_modules/esniff/lib/ws-eol.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar from         = __webpack_require__(/*! es5-ext/array/from */ \"./node_modules/es5-ext/array/from/index.js\")\n  , primitiveSet = __webpack_require__(/*! es5-ext/object/primitive-set */ \"./node_modules/es5-ext/object/primitive-set.js\");\n\nmodule.exports = primitiveSet.apply(null, from('\\n\\r\\u2028\\u2029'));\n\n\n//# sourceURL=webpack:///./node_modules/esniff/lib/ws-eol.js?");
+
+/***/ }),
+
+/***/ "./node_modules/esniff/lib/ws-inline.js":
+/*!**********************************************!*\
+  !*** ./node_modules/esniff/lib/ws-inline.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar from         = __webpack_require__(/*! es5-ext/array/from */ \"./node_modules/es5-ext/array/from/index.js\")\n  , primitiveSet = __webpack_require__(/*! es5-ext/object/primitive-set */ \"./node_modules/es5-ext/object/primitive-set.js\");\n\nmodule.exports = primitiveSet.apply(null, from(' \\f\\t\\v​\\u00a0\\u1680​\\u180e' +\n\t'\\u2000​\\u2001\\u2002​\\u2003\\u2004​\\u2005\\u2006​\\u2007\\u2008​\\u2009\\u200a' +\n\t'​​​\\u202f\\u205f​\\u3000'));\n\n\n//# sourceURL=webpack:///./node_modules/esniff/lib/ws-inline.js?");
+
+/***/ }),
+
+/***/ "./node_modules/esniff/lib/ws.js":
+/*!***************************************!*\
+  !*** ./node_modules/esniff/lib/ws.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar primitiveSet = __webpack_require__(/*! es5-ext/object/primitive-set */ \"./node_modules/es5-ext/object/primitive-set.js\")\n  , eol          = __webpack_require__(/*! ./ws-eol */ \"./node_modules/esniff/lib/ws-eol.js\")\n  , inline       = __webpack_require__(/*! ./ws-inline */ \"./node_modules/esniff/lib/ws-inline.js\");\n\nmodule.exports = primitiveSet.apply(null,\n\tObject.keys(eol).concat(Object.keys(inline)));\n\n\n//# sourceURL=webpack:///./node_modules/esniff/lib/ws.js?");
+
+/***/ }),
+
+/***/ "./node_modules/object-assign/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("/*\nobject-assign\n(c) Sindre Sorhus\n@license MIT\n*/\n\n\n/* eslint-disable no-unused-vars */\nvar getOwnPropertySymbols = Object.getOwnPropertySymbols;\nvar hasOwnProperty = Object.prototype.hasOwnProperty;\nvar propIsEnumerable = Object.prototype.propertyIsEnumerable;\n\nfunction toObject(val) {\n\tif (val === null || val === undefined) {\n\t\tthrow new TypeError('Object.assign cannot be called with null or undefined');\n\t}\n\n\treturn Object(val);\n}\n\nfunction shouldUseNative() {\n\ttry {\n\t\tif (!Object.assign) {\n\t\t\treturn false;\n\t\t}\n\n\t\t// Detect buggy property enumeration order in older V8 versions.\n\n\t\t// https://bugs.chromium.org/p/v8/issues/detail?id=4118\n\t\tvar test1 = new String('abc');  // eslint-disable-line no-new-wrappers\n\t\ttest1[5] = 'de';\n\t\tif (Object.getOwnPropertyNames(test1)[0] === '5') {\n\t\t\treturn false;\n\t\t}\n\n\t\t// https://bugs.chromium.org/p/v8/issues/detail?id=3056\n\t\tvar test2 = {};\n\t\tfor (var i = 0; i < 10; i++) {\n\t\t\ttest2['_' + String.fromCharCode(i)] = i;\n\t\t}\n\t\tvar order2 = Object.getOwnPropertyNames(test2).map(function (n) {\n\t\t\treturn test2[n];\n\t\t});\n\t\tif (order2.join('') !== '0123456789') {\n\t\t\treturn false;\n\t\t}\n\n\t\t// https://bugs.chromium.org/p/v8/issues/detail?id=3056\n\t\tvar test3 = {};\n\t\t'abcdefghijklmnopqrst'.split('').forEach(function (letter) {\n\t\t\ttest3[letter] = letter;\n\t\t});\n\t\tif (Object.keys(Object.assign({}, test3)).join('') !==\n\t\t\t\t'abcdefghijklmnopqrst') {\n\t\t\treturn false;\n\t\t}\n\n\t\treturn true;\n\t} catch (err) {\n\t\t// We don't expect any of the above to throw, but better to be safe.\n\t\treturn false;\n\t}\n}\n\nmodule.exports = shouldUseNative() ? Object.assign : function (target, source) {\n\tvar from;\n\tvar to = toObject(target);\n\tvar symbols;\n\n\tfor (var s = 1; s < arguments.length; s++) {\n\t\tfrom = Object(arguments[s]);\n\n\t\tfor (var key in from) {\n\t\t\tif (hasOwnProperty.call(from, key)) {\n\t\t\t\tto[key] = from[key];\n\t\t\t}\n\t\t}\n\n\t\tif (getOwnPropertySymbols) {\n\t\t\tsymbols = getOwnPropertySymbols(from);\n\t\t\tfor (var i = 0; i < symbols.length; i++) {\n\t\t\t\tif (propIsEnumerable.call(from, symbols[i])) {\n\t\t\t\t\tto[symbols[i]] = from[symbols[i]];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn to;\n};\n\n\n//# sourceURL=webpack:///./node_modules/object-assign/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/print-object/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/print-object/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar objectAssign = __webpack_require__(/*! object-assign */ \"./node_modules/object-assign/index.js\");\nvar compile  = __webpack_require__(/*! es6-template-strings/compile */ \"./node_modules/es6-template-strings/compile.js\");\nvar template = __webpack_require__(/*! es6-template-strings */ \"./node_modules/es6-template-strings/index.js\");\nvar resolve  = __webpack_require__(/*! es6-template-strings/resolve-to-string */ \"./node_modules/es6-template-strings/resolve-to-string.js\");\n\nmodule.exports = function(obj, opts){\n\n    var options = objectAssign({}, opts);\n\n    if (!obj) {\n        throw new Error('You must supply an object to print');\n    }\n\n    var unpacked;\n\n    if (options.html){\n        unpacked = unpackEmbeddedObjects(obj, '', '<br>');\n        return printToHTML(unpacked, options);\n    } else {\n        unpacked = unpackEmbeddedObjects(obj, '\\n  ', '');\n        return printObject(unpacked, '', '\\n');\n    }\n\n\n};\n\n/**\n *\n * @param {Object} obj\n * @param {String} beforeLine\n * @param {String} afterLine\n * @returns {{}}\n */\n\nfunction unpackEmbeddedObjects(obj, beforeLine, afterLine){\n\n    var o = {};\n\n    for(var key in obj){\n\n        if (obj.hasOwnProperty(key)){\n\n            var value = obj[key];\n            var isArray = Array.isArray(value);\n\n            if (!isArray && typeof value === 'object'){\n                o[key] = printObject(value, beforeLine, afterLine);\n            } else {\n                o[key] = value;\n            }\n        }\n\n    }\n\n    return o;\n\n}\n\nfunction printObject(obj, beforeLine, afterLine){\n\n    var s = '';\n\n    for (var key in obj){\n        if (obj.hasOwnProperty(key)){\n            s += beforeLine + key + \": \"+obj[key].toString();\n            s += afterLine;\n        }\n    }\n\n    return s;\n}\n\nfunction printToHTML(obj, opts){\n\n    var options = objectAssign({}, opts);\n\n    var element = options.tag ? options.tag : 'table';\n    var tableStart = compile('<table${s1}${c}${s2}${a}>');\n    var trTemplate = compile('<tr><td>${key}</td><td>${value}</td></tr>');\n    var divStart = compile('<div${c}${a}>');\n    var divTemplate = compile('<div><span>${key}</span><span>${value}</span></div>');\n    var closeTags = ['</table>', '</div>'];\n\n    var className = options.class ? template('class=\"${c}\"', {c:options.class}) : '';\n    var htmlAttr = options.attr || '';\n\n    var spacer1 = className.length > 0 ? ' ' : '';\n    var spacer2 = htmlAttr.length  > 0 ? ' ' : '';\n\n    var row;\n    var start;\n    var end;\n\n    if (element === 'table'){\n        row = trTemplate;\n        start = resolve(tableStart, {s1:spacer1, c:className, s2:spacer2, a:htmlAttr });\n        end = closeTags[0];\n    } else {\n        row = divTemplate;\n        start = resolve(divStart, {c:className, s:spacer, a:htmlAttr });\n        end = closeTags[1];\n    }\n\n    var html = start;\n\n    for(var key in obj){\n\n        if (obj.hasOwnProperty(key)){\n            var value = obj[key];\n            html += resolve(row, {key:key, value:value});\n        }\n    }\n\n    html += end;\n\n    return html;\n\n}\n\n\n\n//# sourceURL=webpack:///./node_modules/print-object/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/type/function/is.js":
+/*!******************************************!*\
+  !*** ./node_modules/type/function/is.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isPrototype = __webpack_require__(/*! ../prototype/is */ \"./node_modules/type/prototype/is.js\");\n\nmodule.exports = function (value) {\n\tif (typeof value !== \"function\") return false;\n\n\tif (!hasOwnProperty.call(value, \"length\")) return false;\n\n\ttry {\n\t\tif (typeof value.length !== \"number\") return false;\n\t\tif (typeof value.call !== \"function\") return false;\n\t\tif (typeof value.apply !== \"function\") return false;\n\t} catch (error) {\n\t\treturn false;\n\t}\n\n\treturn !isPrototype(value);\n};\n\n\n//# sourceURL=webpack:///./node_modules/type/function/is.js?");
+
+/***/ }),
+
+/***/ "./node_modules/type/object/is.js":
+/*!****************************************!*\
+  !*** ./node_modules/type/object/is.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isValue = __webpack_require__(/*! ../value/is */ \"./node_modules/type/value/is.js\");\n\n// prettier-ignore\nvar possibleTypes = { \"object\": true, \"function\": true, \"undefined\": true /* document.all */ };\n\nmodule.exports = function (value) {\n\tif (!isValue(value)) return false;\n\treturn hasOwnProperty.call(possibleTypes, typeof value);\n};\n\n\n//# sourceURL=webpack:///./node_modules/type/object/is.js?");
+
+/***/ }),
+
+/***/ "./node_modules/type/plain-function/is.js":
+/*!************************************************!*\
+  !*** ./node_modules/type/plain-function/is.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isFunction = __webpack_require__(/*! ../function/is */ \"./node_modules/type/function/is.js\");\n\nvar classRe = /^\\s*class[\\s{/}]/, functionToString = Function.prototype.toString;\n\nmodule.exports = function (value) {\n\tif (!isFunction(value)) return false;\n\tif (classRe.test(functionToString.call(value))) return false;\n\treturn true;\n};\n\n\n//# sourceURL=webpack:///./node_modules/type/plain-function/is.js?");
+
+/***/ }),
+
+/***/ "./node_modules/type/prototype/is.js":
+/*!*******************************************!*\
+  !*** ./node_modules/type/prototype/is.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isObject = __webpack_require__(/*! ../object/is */ \"./node_modules/type/object/is.js\");\n\nmodule.exports = function (value) {\n\tif (!isObject(value)) return false;\n\ttry {\n\t\tif (!value.constructor) return false;\n\t\treturn value.constructor.prototype === value;\n\t} catch (error) {\n\t\treturn false;\n\t}\n};\n\n\n//# sourceURL=webpack:///./node_modules/type/prototype/is.js?");
+
+/***/ }),
+
+/***/ "./node_modules/type/value/is.js":
+/*!***************************************!*\
+  !*** ./node_modules/type/value/is.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\n// ES3 safe\nvar _undefined = void 0;\n\nmodule.exports = function (value) { return value !== _undefined && value !== null; };\n\n\n//# sourceURL=webpack:///./node_modules/type/value/is.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -105,7 +740,7 @@ eval("!function(e,t){ true?module.exports=t():undefined}(this,function(){\"use s
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dropbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropbox */ \"./node_modules/dropbox/dist/Dropbox-sdk.min.js\");\n/* harmony import */ var dropbox__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dropbox__WEBPACK_IMPORTED_MODULE_0__);\n// require('isomorphic-fetch'); // or another library of choice.\n\n\nfunction init(){\n\n    document.getElementById('update').addEventListener('click', function () {\n        const TOKEN = document.getElementById('token').value;\n        console.log(TOKEN);\n        var dbx = new dropbox__WEBPACK_IMPORTED_MODULE_0__[\"Dropbox\"]({ accessToken: TOKEN});\n        dbx.filesListFolder({path: ''})\n            .then(function(response) {\n                console.log(response);\n                document.getElementById('console').innerText = JSON.stringify(response.entries);\n            })\n            .catch(function(error) {\n                console.log(error);\n            });\n\n    });\n\n}\n\nwindow.addEventListener('load', function () {\n    init();\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dropbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropbox */ \"./node_modules/dropbox/dist/Dropbox-sdk.min.js\");\n/* harmony import */ var dropbox__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dropbox__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var print_object__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! print-object */ \"./node_modules/print-object/index.js\");\n/* harmony import */ var print_object__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(print_object__WEBPACK_IMPORTED_MODULE_1__);\n// require('isomorphic-fetch'); // or another library of choice.\n\n\n\nfunction init(){\n\n    document.getElementById('update').addEventListener('click', function () {\n        const TOKEN = document.getElementById('token').value;\n        console.log(TOKEN);\n        var dbx = new dropbox__WEBPACK_IMPORTED_MODULE_0__[\"Dropbox\"]({ accessToken: TOKEN});\n        dbx.filesListFolder({path: ''})\n            .then(function(response) {\n                console.log(response);\n                document.getElementById('console').innerHTML = print_object__WEBPACK_IMPORTED_MODULE_1___default()(response.entries);\n            })\n            .catch(function(error) {\n                console.log(error);\n            });\n\n    });\n\n}\n\nwindow.addEventListener('load', function () {\n    init();\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
